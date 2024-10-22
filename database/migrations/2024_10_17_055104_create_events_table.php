@@ -13,10 +13,10 @@ return new class extends Migration {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('name', 100);
-            $table->date('starat');
+            $table->string('name', 100)->comment('料理名');
+            $table->date('start')->comment('調理日');
             $table->date('end');
-            $table->string('color');
+            $table->string('color')->comment('色');
             $table->timestamps();
         });
     }
