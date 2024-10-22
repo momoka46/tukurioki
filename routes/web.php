@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,5 @@ Route::get('/', function () {
 
 });
 Route::get('/calendar', [EventController::class, 'show'])->name("show"); // カレンダー表示
+
+Route::get('/recipes', [RecipeController::class, 'index']);   
