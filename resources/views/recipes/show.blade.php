@@ -19,6 +19,11 @@
             <div>
                 <img src="{{ $recipe->image }}" alt="画像が読み込めません。">
             </div>
+            <!-- いいね機能 -->
+             <div><p>{{$post->content}}</p></div>
+             <div></div>
+              {{-- のちに使います --}}
+    <script></script>
 
             <!-- 手順表示 -->
           <div>

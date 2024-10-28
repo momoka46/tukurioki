@@ -19,7 +19,7 @@ return new class extends Migration
             // $table->integer('frozen_storage')->nullable(true);
             // $table->integer('cold_storage')->nullable(true);
             // $table->boolean('is_post')->nullable(true);
-            // $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
         });

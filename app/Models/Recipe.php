@@ -16,7 +16,7 @@ class Recipe extends Model
         // 'frozen_storage',
         // 'cold_storage',
         // 'is_post',
-        // 'user_id',
+        'user_id',
     ];
 
     public function user()
