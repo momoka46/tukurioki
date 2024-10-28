@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('recipe_id')->constrained();
             $table->integer('number');
-            $table->string('text');
+            $table->string('step');
             $table->timestamps();
         });
     }

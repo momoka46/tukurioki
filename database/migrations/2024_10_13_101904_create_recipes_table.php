@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('name',100);
-            $table->string('image')->nullable(true);
-            $table->integer('cookingtime');
-            $table->integer('frozen_storage')->nullable(true);
-            $table->integer('colr_storage')->nullable(true);
-            $table->boolean('is_post');
-            $table->foreignId('user_id')->constrained();
+            $table->string('image')->nullable();
+            // $table->integer('cookingtime')->nullable(true);
+            // $table->integer('frozen_storage')->nullable(true);
+            // $table->integer('cold_storage')->nullable(true);
+            // $table->boolean('is_post')->nullable(true);
+            // $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
 
         });
