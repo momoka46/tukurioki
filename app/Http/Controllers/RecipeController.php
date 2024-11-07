@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Recipe;
 use Cloudinary;
 use App\Models\Step;
+use Auth;
+
 
 class RecipeController extends Controller
 {
@@ -32,6 +34,8 @@ public function store(Request $request, Recipe $recipe)
        
        
         $input += ['image' => $image_url];   //追加
+        $input["user_id" ] = Auth()->id();//連想配列
+        //dd($input);
         $recipe->fill($input)->save();
 
         //stepの保存方法for
