@@ -14,14 +14,24 @@
             <input type="text" name="recipe[name]" placeholder="Name"/>
         </div>
 
+        <h2>保存期間</h2>
+
         <!-- 画像の投稿 -->
         <div class="image">
         <h2>イメージ画僧</h2>
             <input type="file" name="image">
         </div>
 
+        <div id="ingredient-inputs">
         <h2>材料</h2>
+        <div class="ingredient-row">
+            <input type="text" name="ingredients[0][name]" placeholder="材料名">
+            <input type="text" name="ingredients[0][quantity]" placeholder="量">
+        </div>
 
+        </div>
+    <button type="button" onclick="addIngredient()">材料を追加</button>
+    
 
         <!-- 手順追加 -->
         <div class="container ip-fields-container">
@@ -38,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <input type="submit" value="投稿"/>
+        <input type="submit" value="レシピを投稿"/>
        
     </form>
 
@@ -48,6 +58,19 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        let ingredientIndex = 1;
+// 材料の追加
+function addIngredient() {
+    const container = document.getElementById('ingredient-inputs');
+    const newRow = document.createElement('div');
+    newRow.classList.add('ingredient-row');
+    newRow.innerHTML = `
+        <input type="text" name="ingredients[${ingredientIndex}][name]" placeholder="材料名">
+        <input type="text" name="ingredients[${ingredientIndex}][quantity]" placeholder="量">
+    `;
+    container.appendChild(newRow);
+    ingredientIndex++;
+}
         var fieldCount = 1; // 次の手順の番号
 
         $(document).on('click', '.add-field-btn', function() {

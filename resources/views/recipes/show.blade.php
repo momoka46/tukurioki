@@ -29,7 +29,7 @@
 </head>
 <body>
     <x-app-layout>
-        <h1 class="title">{{ $recipe->name }}</h1>
+        <h1 class="text-2xl,title">{{ $recipe->name }}</h1>
         <div>
             <!-- 画像表示 -->
             <div>
@@ -60,15 +60,25 @@
                 <p>loginしていません</p>
             @endguest
 
-            <!-- 手順表示 -->
+           
             <div>
-                <h2>調理手順</h2>
+                <!-- 材料表示 -->
+            <h2>材料</h2>
+            <ul>
+                @foreach ($ingredients as $ingredient)
+                    <li>{{ $ingredient->name }}: {{ $ingredient->quantity }}</li>
+                @endforeach
+            </ul>
+               
+            </div>
+            <!-- 手順表示 -->
+            <h2>調理手順</h2>
                 <ol>
                 @foreach ($recipe->steps as $index => $step)
                         <li>{{ $index + 1 }}:{{ $step->step }}</li>
                     @endforeach
                 </ol>
-            </div>
+            
         </div>
 
         <div class="footer">

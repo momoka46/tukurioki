@@ -33,6 +33,11 @@ class Recipe extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function ingredients()
+{
+    return $this->hasMany(Ingredient::class);
+}
+
     //自身がいいねしているのかどうか判定するメソッド（しているならtrue,していないならfalseを返す）
     public function isLikedByAuthUser() :bool
     {
