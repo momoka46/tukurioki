@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::get('/recipes', [RecipeController::class, 'index']);
 Route::get('/recipes/create', [RecipeController::class, 'create']);
 Route::post('/recipes', [RecipeController::class, 'store']);  //画像を含めた投稿の保存処理
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show']); //投稿詳細画面の表示
+Route::post('/recipes/like', [LikeController::class, 'likeRecipe']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

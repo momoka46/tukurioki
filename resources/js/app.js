@@ -1,5 +1,7 @@
 import './bootstrap';
 
+import "./like";
+
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

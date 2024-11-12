@@ -1,0 +1,21 @@
+/* いいね押下時の★色 */
+.liked {
+    color: orangered;
+    transition: 0.2s;
+}
+.flexbox {
+    align-items: center;
+    display: flex;
+}
+.count-num {
+    font-size: 20px;
+    margin-left: 10px;
+}
+.fa-star {
+    font-size: 30px;
+}
+
+h1{
+font-size: 36px;
+
+}
