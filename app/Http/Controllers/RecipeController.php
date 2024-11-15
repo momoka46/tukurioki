@@ -13,9 +13,11 @@ use Auth;
 
 class RecipeController extends Controller
 {
+    // これはすべてのレシピを取ってきている。その件数を制限する方法はカリキュラム解答７－２解説３参照
     public function index(Recipe $recipe)
 {
-    return $recipe->get();
+    //return $recipe->get();
+    return view('recipes.index')->with(['recipes'=>$recipe->get()]);
 }
 
 public function create()

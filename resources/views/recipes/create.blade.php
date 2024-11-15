@@ -5,6 +5,7 @@
     <title>レシピ作成</title>
 </head>
 <body>
+<x-app-layout>
     <h1>レシピ作成</h1>
   
     <form action="/recipes" method="POST" enctype="multipart/form-data">
@@ -109,5 +110,6 @@ function addIngredient() {
             fieldCount = $('.ip-fields-container .row').length; // 現在の行数を再設定
         }
     </script>
+    </x-app-layout>
 </body>
 </html>
