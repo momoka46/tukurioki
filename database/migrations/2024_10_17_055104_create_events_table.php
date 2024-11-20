@@ -11,14 +11,16 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('name', 100)->comment('料理名');
-            $table->date('start')->comment('調理日');
-            $table->date('end');
-            $table->string('color')->comment('色');
-            $table->timestamps();
-        });
+        $table->id();
+        $table->string('event_title')->comment('イベント名');
+        $table->string('event_body')->nullable()->comment('イベント内容');
+        $table->date('start_date')->comment('開始日');
+        $table->date('end_date')->comment('終了日');
+        $table->string('event_color')->comment('背景色');
+        $table->string('event_border_color')->comment('枠線色');
+        $table->timestamps();
+    });
+        
     }
 
     /**

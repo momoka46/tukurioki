@@ -35,11 +35,12 @@ if (calendarEl) {
                 }
             }
         },
+
         headerToolbar: { // ヘッダーの設定
             // コンマのみで区切るとページ表示時に間が空かず、半角スペースで区切ると間が空く（半角があるかないかで表示が変わることに注意）
             start: "prev,next today", // ヘッダー左（前月、次月、今日の順番で左から配置）
             center: "title", // ヘッダー中央（今表示している月、年）
-            end: "dayGridMonth,timeGridWeek", // ヘッダー右（月形式、時間形式）
+            end: "eventAddButton dayGridMonth,timeGridWeek", // ヘッダー右（月形式、時間形式）
         },
         height: "auto", // 高さをウィンドウサイズに揃える
 

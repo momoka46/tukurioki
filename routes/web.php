@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/calendar', [EventController::class, 'show'])->name("show")->middleware('auth'); // カレンダー表示
+Route::get('/calendar', [EventController::class, 'show'])->name("calendar")->middleware('auth'); // カレンダー表示
 Route::post('/calendar/create', [EventController::class, 'create'])->name("event"); // 予定の新規追加
 Route::post('/calendar/get',  [EventController::class, 'get'])->name("get"); // DBに登録した予定を取得
 

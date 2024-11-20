@@ -21,7 +21,7 @@
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
                              {{ __('レシピ作成') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('show')" :active="request()->routeIs('show')">
+                    <x-nav-link :href="route('calendar')" :active="request()->routeIs('show')">
                              {{ __('カレンダー') }}
                     </x-nav-link>
                    
