@@ -60,7 +60,20 @@
                 <p>loginしていません</p>
             @endguest
 
-           
+            <div>
+    <h2>調理時間</h2>
+    <p>{{ $recipe->cookingtime }} 分</p>
+</div>
+
+<div>
+    <h2>冷凍保管時間</h2>
+    <p>{{ $recipe->frozen_storage }} 日</p>
+</div>
+
+<div>
+    <h2>冷蔵保管時間</h2>
+    <p>{{ $recipe->cold_storage }} 日</p>
+</div>
             <div>
                 <!-- 材料表示 -->
             <h2>材料</h2>

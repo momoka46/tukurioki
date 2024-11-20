@@ -35,9 +35,15 @@ public function store(Request $request, Recipe $recipe)
         
         $input = $request['recipe'];
         $input += ['image' => $image_url];   //追加
+        $input += [
+            'cookingtime' => $request->input('recipe.cookingtime'),
+            'frozen_storage' => $request->input('recipe.frozen_storage'),
+            'cold_storage' => $request->input('recipe.cold_storage'),
+        ];
         $input["user_id" ] = Auth()->id();//連想配列
         //dd($input);
         $recipe->fill($input)->save();
+
 
         //stepの保存方法for
         $textInput=$request->input("step");

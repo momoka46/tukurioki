@@ -14,8 +14,20 @@
             <h2>料理名</h2>
             <input type="text" name="recipe[name]" placeholder="Name"/>
         </div>
+        <div class="cooking-time">
+    <h2>調理時間 (分)</h2>
+    <input type="number" name="recipe[cookingtime]" placeholder="例: 30" min="1">
+</div>
 
-        <h2>保存期間</h2>
+<div class="frozen-storage">
+    <h2>冷凍保管時間 (日)</h2>
+    <input type="number" name="recipe[frozen_storage]" placeholder="例: 7" min="0">
+</div>
+
+<div class="cold-storage">
+    <h2>冷蔵保管時間 (日)</h2>
+    <input type="number" name="recipe[cold_storage]" placeholder="例: 3" min="0">
+</div>
 
         <!-- 画像の投稿 -->
         <div class="image">
