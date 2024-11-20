@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-    
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>FullCalendar</title>
@@ -11,17 +10,18 @@
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         @vite(['resources/css/app.css', 'resources/js/app.js']) <!-- vite用の記述忘れずに -->
     </head>
-    <body>
     <x-app-layout>
+    <body>
         <!-- 以下のdivタグ内にカレンダーを表示 -->
         <div id='calendar'></div>
-        <!-- カレンダー新規追加モーダル -->
-        <div id="modal-add" class="modal">
+
+         <!-- カレンダー新規追加モーダル -->
+         <div id="modal-add" class="modal">
             <div class="modal-contents">
                 <form method="POST" action="{{ route('event') }}">
                     @csrf
                     <input id="new-id" type="hidden" name="id" value="" />
-                    <label for="name">料理名</label>
+                    <label for="event_title">タイトル</label>
                     <input id="new-event_title" class="input-title" type="text" name="event_title" value="" />
                     <label for="start_date">開始日時</label>
                     <input id="new-start_date" class="input-date" type="date" name="start_date" value="" />
@@ -39,8 +39,10 @@
                 </form>
             </div>
         </div>
-        </x-app-layout>
+
     </body>
+    </x-app-layout>
+  
 </html>
 
 <style scoped>
