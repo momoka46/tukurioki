@@ -17,20 +17,21 @@ use App\Http\Controllers\LikeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [RecipeController::class, 'index'])->name('index');//ホーム画面表示
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/calendar', [EventController::class, 'show'])->name("show"); // カレンダー表示
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/recipes', [RecipeController::class, 'index']);   
-Route::get('/recipes/create', [RecipeController::class, 'create']);
+Route::get('/calendar', [EventController::class, 'show'])->name("show")->middleware('auth'); // カレンダー表示
+Route::post('/calendar/create', [EventController::class, 'create'])->name("event"); // 予定の新規追加
+Route::post('/calendar/get',  [EventController::class, 'get'])->name("get"); // DBに登録した予定を取得
+
+//Route::get('/recipes', [RecipeController::class, 'index']);   
+Route::get('/recipes/create', [RecipeController::class, 'create'])->name('create')->middleware('auth');
 Route::post('/recipes', [RecipeController::class, 'store']);  //画像を含めた投稿の保存処理
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show']); //投稿詳細画面の表示
-Route::post('/recipes/like', [LikeController::class, 'likeRecipe']);
+Route::post('/recipes/like', [LikeController::class, 'likeRecipe'])->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

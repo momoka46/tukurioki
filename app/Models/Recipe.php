@@ -12,10 +12,10 @@ class Recipe extends Model
     protected $fillable = [
         'name',
         'image',
-        // 'cookingtime',
-        // 'frozen_storage',
-        // 'cold_storage',
-        // 'is_post',
+        'cookingtime',
+        'frozen_storage',
+        'cold_storage',
+        'is_post',
         'user_id',
     ];
 
