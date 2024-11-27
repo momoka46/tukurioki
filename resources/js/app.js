@@ -1,7 +1,7 @@
 import './bootstrap';
 import './calendar';
-
-import "./like";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import "./like";
 
 import Alpine from 'alpinejs';
 

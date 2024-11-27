@@ -61,38 +61,66 @@
             @endguest
 
             <div>
-    <h2>調理時間</h2>
-    <p>{{ $recipe->cookingtime }} 分</p>
-</div>
-
-<div>
-    <h2>冷凍保管時間</h2>
-    <p>{{ $recipe->frozen_storage }} 日</p>
-</div>
-
-<div>
-    <h2>冷蔵保管時間</h2>
-    <p>{{ $recipe->cold_storage }} 日</p>
-</div>
-            <div>
-                <!-- 材料表示 -->
-            <h2>材料</h2>
-            <ul>
-                @foreach ($ingredients as $ingredient)
-                    <li>{{ $ingredient->name }}: {{ $ingredient->quantity }}</li>
-                @endforeach
-            </ul>
-               
+                <h2>調理時間</h2>
+                <p>{{ $recipe->cookingtime }} 分</p>
             </div>
-            <!-- 手順表示 -->
-            <h2>調理手順</h2>
-                <ol>
-                @foreach ($recipe->steps as $index => $step)
-                        <li>{{ $index + 1 }}:{{ $step->step }}</li>
+
+            <div>
+                <h2>冷凍保管時間</h2>
+                <p>{{ $recipe->frozen_storage }} 日</p>
+            </div>
+
+            <div>
+                <h2>冷蔵保管時間</h2>
+                <p>{{ $recipe->cold_storage }} 日</p>
+            </div>
+                <div>
+                    <!-- 材料表示 -->
+                <h2>材料</h2>
+                <ul>
+                    @foreach ($ingredients as $ingredient)
+                        <li>{{ $ingredient->name }}: {{ $ingredient->quantity }}</li>
                     @endforeach
-                </ol>
+                </ul>
+                    
+                </div>
+                <!-- 手順表示 -->
+                <h2>調理手順</h2>
+                    <ol>
+                    @foreach ($recipe->steps as $index => $step)
+                            <li>{{ $index + 1 }}:{{ $step->step }}</li>
+                        @endforeach
+                    </ol>
+                
+            </div>
+
+            {{-- 冷凍・冷蔵保存期間のカレンダー追加ボタン --}}
+<div>
+    <button onclick="addToCalendar('{{ $recipe->name }}', {{ $frozenStorage }}, '冷凍')">冷凍保存期間をカレンダーに追加</button>
+    <button onclick="addToCalendar('{{ $recipe->name }}', {{ $coldStorage }}, '冷蔵')">冷蔵保存期間をカレンダーに追加</button>
+</div>
+
             
-        </div>
+
+        <!-- <form method="POST" action="{{ route('limit_create') }}">
+            @csrf
+            <input id="new-id" type="hidden" name="id" value="" />
+            <label for="event_title">タイトル</label>
+            <input id="new-event_title" class="input-title" type="text" name="event_title" value="" />
+            <label for="start_date">開始日時</label>
+            <input id="new-start_date" class="input-date" type="date" name="start_date" value="" />
+            <label for="end_date">終了日時</label>
+            <input id="new-end_date" class="input-date" type="date" name="end_date" value="" />
+            <label for="event_body" style="display: block">内容</label>
+            <textarea id="new-event_body" name="event_body" rows="3" value=""></textarea>
+            <label for="event_color">背景色</label>
+            <select id="new-event_color" name="event_color">
+                <option value="blue" selected>青</option>
+                <option value="green">緑</option>
+            </select>
+            <button type="button" onclick="closeAddModal()">キャンセル</button>
+            <button type="submit">決定</button>
+        </form> -->
 
         <div class="footer">
             <a href="/">戻る</a>
@@ -130,6 +158,29 @@
                 });
             });
         });
+        // 保存期間追加の処理
+    function addToCalendar(recipeName, storageDays, type) {
+        const today = new Date();
+        const startDate = today.toISOString().slice(0, 10); // 今日の日付
+        const endDate = new Date();
+        endDate.setDate(endDate.getDate() + storageDays); // 保存期間を計算
+        const formattedEndDate = endDate.toISOString().slice(0, 10); // yyyy-mm-dd形式に変換
+
+        // サーバーに保存リクエストを送信
+        axios.post('/recipes/limit', {
+            event_title: `${type}保存: ${recipeName}`,
+            start_date: startDate,
+            end_date: formattedEndDate,
+            event_color: type === '冷凍' ? 'blue' : 'green',
+        })
+        .then(() => {
+            alert(`${type}保存期間がカレンダーに追加されました！`);
+        })
+        .catch((error) => {
+            console.error("エラー:", error);
+            alert("保存期間の追加に失敗しました。");
+        });
+    }
     </script>
 </body>
 </html>
