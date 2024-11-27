@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\LimitController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\LikeController;
+use App\Models\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/recipes/limit',[LimitController::class,'create'])->name("limit_create");
+
 });
 
 require __DIR__.'/auth.php';

@@ -74,8 +74,11 @@ public function store(Request $request, Recipe $recipe)
     {
         $steps = $recipe->steps;
         $ingredients = $recipe->ingredients;
+     // 冷凍・冷蔵期間をビューに渡す
+    $frozenStorage = $recipe->frozen_storage;
+    $coldStorage = $recipe->cold_storage;
         // return view('/recipes/show')->with(['recipe' => $recipe]);
-    return view('recipes.show', compact('recipe', 'steps','ingredients')); // ビューに渡す
+    return view('recipes.show', compact('recipe', 'steps','ingredients', 'frozenStorage', 'coldStorage')); // ビューに渡す
     
 }
 
