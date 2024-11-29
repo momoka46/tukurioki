@@ -108,7 +108,7 @@
                 newRow.innerHTML = `
             <input type="text" name="tags[]" value="${tagName}" readonly>
             <button type="button" onclick="removeTag(this)">削除</button>
-            ;
+            ;`
                 container.appendChild(newRow);
             }
 
@@ -127,8 +127,7 @@
                     newRow.classList.add('tag-row');
                     newRow.innerHTML = `
                 <input type="text" name="tags[]" value="${newTagName}" readonly>
-                <button type="button" onclick="removeTag(this)">削除</button>
-            `;
+                <button type="button" onclick="removeTag(this)">削除</button>`;
                     container.appendChild(newRow);
                     document.getElementById('new-tag-input').value = '';  // 入力フィールドをリセット
                 }
