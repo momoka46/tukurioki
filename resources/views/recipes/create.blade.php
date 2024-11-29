@@ -92,8 +92,10 @@
             <a href="/">戻る</a>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+
         <script>
+
 
 
             // tagの処理
@@ -188,6 +190,7 @@
                 fieldCount = $('.ip-fields-container .row').length; // 現在の行数を再設定
             }
         </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </x-app-layout>
 </body>
 
