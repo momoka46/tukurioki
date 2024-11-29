@@ -80,7 +80,7 @@
                         <input type="text" id="step_0" class="form-control" placeholder="手順内容" name="step[0]" value="">
                     </div>
                     <div class="col-sm-4">
-                        <button class="add-field-btn" type="button">+</button>
+                        <button class="add-field-btn" type="button" onclick="addNewStep()">+</button>
                     </div>
                 </div>
             </div>
@@ -106,9 +106,9 @@
                 const newRow = document.createElement('div');
                 newRow.classList.add('tag-row');
                 newRow.innerHTML = `
-            <input type="text" name="tags[]" value="${tagName}" readonly>
-            <button type="button" onclick="removeTag(this)">削除</button>
-            ;`
+                    <input type="text" name="tags[]" value="${tagName}" readonly>
+                    <button type="button" onclick="removeTag(this)">削除</button>
+                    ;`
                 container.appendChild(newRow);
             }
 
@@ -153,7 +153,8 @@
             }
             var fieldCount = 1; // 次の手順の番号
 
-            $(document).on('click', '.add-field-btn', function () {
+            // $(document).on('click', '.add-field-btn', function () {
+            function addNewStep(){
                 // 新しい手順フィールドを作成
                 var newField = $('<div class="row" id="step-row-' + fieldCount + '">' +
                     '<div class="col-sm-2">' +
@@ -163,21 +164,23 @@
                     '    <input type="text" id="step_' + fieldCount + '" class="form-control" placeholder="手順内容" name="step[' + fieldCount + ']" value="">' +
                     '</div>' +
                     '<div class="col-sm-4">' +
-                    '    <button class="remove-field-btn" type="button">-</button>' +
+                    '    <button class="remove-field-btn" type="button" onclick="removeStep(fieldCount)">-</button>' +
                     '</div>' +
                     '</div>');
 
                 // 手順フィールドを追加
                 $('.ip-fields-container').append(newField);
                 fieldCount++; // 手順番号を増やす
-            });
+            }
+          // });
 
-            $(document).on('click', '.remove-field-btn', function () {
+            function removeStep(num) {
+                console.log(num);
                 // 手順フィールドの削除
                 $(this).closest('.row').remove();
                 // 手順番号を再計算
                 updateStepNumbers();
-            });
+            }
 
             function updateStepNumbers() {
                 // 現在の手順フィールドをリセットして番号を更新
