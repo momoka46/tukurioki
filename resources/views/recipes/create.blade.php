@@ -29,7 +29,7 @@
                 </div>
                 <div id="new-tag">
                     <!-- 新しいタグを入力するフォーム -->
-                    <input type="text" id="new-tag-input" name="tags" placeholder="新しいタグを入力" style="display:none;">
+                    <input type="text" id="new-tag-input" name="tags[]" placeholder="新しいタグを入力" style="display:none;">
                     <button type="button" onclick="toggleNewTagInput()">新しいタグを追加</button>
                 </div>
                 <div id="tag-inputs">
@@ -95,6 +95,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
 
+
             // tagの処理
             let tagIndex = 0; // 新しいタグインデックス
             // 既存タグをクリックしたときにタグ入力エリアに追加
@@ -105,7 +106,7 @@
                 newRow.innerHTML = `
             <input type="text" name="tags[]" value="${tagName}" readonly>
             <button type="button" onclick="removeTag(this)">削除</button>
-        `;
+            ;
                 container.appendChild(newRow);
             }
 
