@@ -72,7 +72,7 @@
             <!-- 手順追加 -->
             <div class="container ip-fields-container">
                 <h2>調理手順</h2>
-                <div class="row" id="step-row-0">
+                <div class="row" id="step-row-1">
                     <div class="col-sm-2 flex flex-center">
                         <label for="step_0">手順 1</label>
                     </div>
@@ -95,8 +95,6 @@
         
 
         <script>
-
-
 
             // tagの処理
             let tagIndex = 0; // 新しいタグインデックス
@@ -156,7 +154,7 @@
             // $(document).on('click', '.add-field-btn', function () {
             function addNewStep(){
                 // 新しい手順フィールドを作成
-                var newField = $('<div class="row" id="step-row-' + fieldCount + '">' +
+                var newField = $('<div class="row" id="step-row-' + (fieldCount + 1) + '">' +
                     '<div class="col-sm-2">' +
                     '    <label for="step_' + fieldCount + '">手順 ' + (fieldCount + 1) + '</label>' + // 手順番号
                     '</div>' +
@@ -176,8 +174,9 @@
 
             function removeStep(num) {
                 console.log(num);
-                // 手順フィールドの削除
-                $(this).closest('.row').remove();
+                let delet_content=document.getElementById(`step-row-${fieldCount}`);
+                // 手順フィールドの削除`
+                delet_content.remove();
                 // 手順番号を再計算
                 updateStepNumbers();
             }
