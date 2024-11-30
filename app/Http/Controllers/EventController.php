@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Auth;
 
 class EventController extends Controller
 {
@@ -35,6 +36,7 @@ class EventController extends Controller
 
     // DBから予定取得
     public function get(Request $request, Event $event){
+        $id=Auth()->id();
         // バリデーション
         $request->validate([
              'start_date' => 'required|integer',
@@ -57,6 +59,7 @@ class EventController extends Controller
                 'event_border_color as borderColor'
             )
             // 表示されているカレンダーのeventのみをDBから検索して表示
+            ->where('user_id','=',$id)
             ->where('end_date', '>', $start_date)
             ->where('start_date', '<', $end_date) // AND条件
             ->get();
