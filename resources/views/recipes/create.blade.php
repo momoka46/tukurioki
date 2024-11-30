@@ -23,14 +23,20 @@
                 <div id="existing-tags">
                     <!-- 既存タグがボタン形式で表示されます -->
                     @foreach ($tags as $tag)
-                        <button type="button" class="tag-button"
-                            onclick="addTag('{{ $tag->name }}')">{{ $tag->name }}</button>
+                        <div>
+                            <input type="checkbox" name="tags[{{$tag->id}}]" value="{{$tag->id}}">{{$tag->name}}
+                        </div>
+                        <!-- <button type="button" class="tag-button"
+                            onclick="addTag('{{ $tag->name }}')">{{ $tag->name }}</button> -->
                     @endforeach
                 </div>
-                <div id="new-tag">
-                    <!-- 新しいタグを入力するフォーム -->
-                    <input type="text" id="new-tag-input" name="tags[]" placeholder="新しいタグを入力" style="display:none;">
-                    <button type="button" onclick="toggleNewTagInput()">新しいタグを追加</button>
+
+                <div  id="new-tag" >
+                   
+                        <!-- 新しいタグを入力するフォーム -->
+                        <input type="text" id="new-tag-input" placeholder="新しいタグを入力">
+                        <button type="button" onclick="addNewTag()">新しいタグを追加</button>
+                  
                 </div>
                 <div id="tag-inputs">
                     <!-- タグが追加される場所 -->
@@ -96,6 +102,32 @@
 
         <script>
 
+            async function addNewTag(){
+                const input_tag = document.getElementById("new-tag-input").value;
+                console.log(input_tag);
+                //非同期データ処理
+                const res = await fetch('/tag', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ input_tag: input_tag})
+                })
+                .then(res => res.json())//
+                .then(data => {
+                    //console.log(data);
+                    const container = document.getElementById('existing-tags');
+                    const newTag = document.createElement('div');
+                   // newTag.innerHTML = `${data['newTag']['name']}`;
+                   newTag.innerHTML = `<input type="checkbox" name="tags[${data['newTag']['id']}]" value="${data['newTag']['id']}">${data['newTag']['name']}`;
+                    container.appendChild(newTag);
+                })
+                // .catch(() => {
+                //     alert('処理が失敗しました。画面を再読み込みし、通信環境の良い場所で再度お試しください。');
+                // });
+            }
+
             // tagの処理
             let tagIndex = 0; // 新しいタグインデックス
             // 既存タグをクリックしたときにタグ入力エリアに追加
@@ -116,20 +148,20 @@
                 newTagInput.style.display = newTagInput.style.display === 'none' ? 'block' : 'none';
             }
 
-            // 新しいタグを手動で追加
-            function addNewTag() {
-                const newTagName = document.getElementById('new-tag-input').value;
-                if (newTagName) {
-                    const container = document.getElementById('tag-inputs');
-                    const newRow = document.createElement('div');
-                    newRow.classList.add('tag-row');
-                    newRow.innerHTML = `
-                <input type="text" name="tags[]" value="${newTagName}" readonly>
-                <button type="button" onclick="removeTag(this)">削除</button>`;
-                    container.appendChild(newRow);
-                    document.getElementById('new-tag-input').value = '';  // 入力フィールドをリセット
-                }
-            }
+            // // 新しいタグを手動で追加
+            // function addNewTag() {
+            //     const newTagName = document.getElementById('new-tag-input').value;
+            //     if (newTagName) {
+            //         const container = document.getElementById('tag-inputs');
+            //         const newRow = document.createElement('div');
+            //         newRow.classList.add('tag-row');
+            //         newRow.innerHTML = `
+            //     <input type="text" name="tags[]" value="${newTagName}" readonly>
+            //     <button type="button" onclick="removeTag(this)">削除</button>`;
+            //         container.appendChild(newRow);
+            //         document.getElementById('new-tag-input').value = '';  // 入力フィールドをリセット
+            //     }
+            // }
 
             // タグ入力フィールドを削除
             function removeTag(button) {

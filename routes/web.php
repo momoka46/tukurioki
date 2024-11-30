@@ -34,6 +34,7 @@ Route::get('/recipes/create', [RecipeController::class, 'create'])->name('create
 Route::post('/recipes', [RecipeController::class, 'store']);  //画像を含めた投稿の保存処理
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show']); //投稿詳細画面の表示
 Route::post('/recipes/like', [LikeController::class, 'likeRecipe'])->middleware('auth');
+Route::post('/tag', [RecipeController::class, 'addtag']); //投稿詳細画面の表示
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

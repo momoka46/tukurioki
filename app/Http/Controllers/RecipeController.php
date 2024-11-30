@@ -30,7 +30,7 @@ class RecipeController extends Controller
     public function store(Request $request, Recipe $recipe)
     {
 
-        //dd($request);
+        dd($request);
         // //cloudinaryへ画像を送信し、画像のURLを$image_urlに代入している
         $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         //dd($image_url);  //画像のURLを画面に表示
@@ -69,17 +69,17 @@ class RecipeController extends Controller
             $recipe->ingredients()->save($ingredient);
         }
 
-        // タグの保存処理
-        if ($request->has('tags')) {
-            $tags = $request->input('tags');  // フォームから送信されたタグの配列を取得
-            foreach ($tags as $tagName) {
-                // タグが存在するかチェック
+        // // タグの保存処理
+        // if ($request->has('tags')) {
+        //     $tags = $request->input('tags');  // フォームから送信されたタグの配列を取得
+        //     foreach ($tags as $tagName) {
+        //         // タグが存在するかチェック
                 
-                $tag =Tag::firstOrCreate(['name' => $tagName]);  // 新規作成または既存のタグを取得
-                $recipe->tags()->attach($tag->id);  // レシピとタグを紐付け
-                dd($tag);
-            }
-        }
+        //         $tag =Tag::firstOrCreate(['name' => $tagName]);  // 新規作成または既存のタグを取得
+        //         $recipe->tags()->attach($tag->id);  // レシピとタグを紐付け
+        //         dd($tag);
+        //     }
+        // }
 
         return redirect('/recipes/' . $recipe->id);
     }
@@ -94,6 +94,16 @@ class RecipeController extends Controller
         // return view('/recipes/show')->with(['recipe' => $recipe]);
         return view('recipes.show', compact('recipe', 'steps', 'ingredients', 'frozenStorage', 'coldStorage')); // ビューに渡す
 
+    }
+
+    public function addtag(Request $request, Tag $tag)
+    {
+        $inpu_tag = $request->input_tag;
+        //dd($inpu_tag);
+        $tag->name= $inpu_tag;
+        $tag->save();
+        //dd($tag);
+        return response()->json([ 'newTag' => $tag]);
     }
 
 }

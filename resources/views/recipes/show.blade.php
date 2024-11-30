@@ -148,7 +148,7 @@
                     },
                     body: JSON.stringify({ recipe_id: recipeId })
                 })
-                .then(res => res.json())
+                .then(res => res.json())//
                 .then(data => {
                     // いいね数を更新
                     clickedEl.nextElementSibling.innerHTML = data.likesCount;
