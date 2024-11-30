@@ -20,6 +20,7 @@ class EventController extends Controller
             'end_date' => 'required',
             'event_color' => 'required',
         ]);
+        $user_id=Auth()->id();
 
         // 登録処理
         $event->event_title = $request->input('event_title');
@@ -28,6 +29,7 @@ class EventController extends Controller
         $event->end_date = date("Y-m-d", strtotime("{$request->input('end_date')} +1 day")); // FullCalendarが登録する終了日は仕様で1日ずれるので、その修正を行っている
         $event->event_color = $request->input('event_color');
         $event->event_border_color = $request->input('event_color');
+        $event->user_id=$user_id;
         $event->save();
 
         // カレンダー表示画面にリダイレクトする

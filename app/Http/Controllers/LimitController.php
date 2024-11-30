@@ -17,6 +17,7 @@ class LimitController extends Controller
             'end_date' => 'required',
             'event_color' => 'required',
         ]);
+        $user_id=Auth()->id();
 
         // 登録処理
         $event->event_title = $request->input('event_title');
@@ -25,6 +26,7 @@ class LimitController extends Controller
         $event->end_date = date("Y-m-d", strtotime("{$request->input('end_date')} +1 day")); // FullCalendarが登録する終了日は仕様で1日ずれるので、その修正を行っている
         $event->event_color = $request->input('event_color');
         $event->event_border_color = $request->input('event_color');
+        $event->user_id=$user_id;
         $event->save();
 
         // カレンダー表示画面にリダイレクトする
@@ -32,29 +34,29 @@ class LimitController extends Controller
     }
 }
 
-    if(!empty($recipe->cold_storage)) {
-        Event::create([
-            'event_title' => "{$recipe->name}（冷蔵保存）",
-            'event_body' => "冷蔵保存可能期間が終了します。",
-            'start_date' => now()->toDateString(),
-            'end_date' => now()->addDays($recipe->cold_storage)->toDateString(),
-            'event_color' => 'blue',
-            'event_border_color' => 'blue',
-            'user_id' => $userId,
-        ]);
-    }
+    // if(!empty($recipe->cold_storage)) {
+    //     Event::create([
+    //         'event_title' => "{$recipe->name}（冷蔵保存）",
+    //         'event_body' => "冷蔵保存可能期間が終了します。",
+    //         'start_date' => now()->toDateString(),
+    //         'end_date' => now()->addDays($recipe->cold_storage)->toDateString(),
+    //         'event_color' => 'blue',
+    //         'event_border_color' => 'blue',
+    //         'user_id' => $user_id,
+    //     ]);
+    // }
 
-    // 冷凍保存イベント
-    if (!empty($recipe->frozen_storage)) {
-        Event::create([
-            'event_title' => "{$recipe->name}（冷凍保存）",
-            'event_body' => "冷凍保存可能期間が終了します。",
-            'start_date' => now()->toDateString(),
-            'end_date' => now()->addDays($recipe->frozen_storage)->toDateString(),
-            'event_color' => 'green',
-            'event_border_color' => 'green',
-            'user_id' => $userId,
-        ]);
-    }
+    // // 冷凍保存イベント
+    // if (!empty($recipe->frozen_storage)) {
+    //     Event::create([
+    //         'event_title' => "{$recipe->name}（冷凍保存）",
+    //         'event_body' => "冷凍保存可能期間が終了します。",
+    //         'start_date' => now()->toDateString(),
+    //         'end_date' => now()->addDays($recipe->frozen_storage)->toDateString(),
+    //         'event_color' => 'green',
+    //         'event_border_color' => 'green',
+    //         'user_id' => $user_id,
+    //     ]);
+    // }
 
 
